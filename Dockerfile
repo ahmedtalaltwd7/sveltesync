@@ -15,4 +15,3 @@ EXPOSE 3000
 
 # Force preview to use port 3000 and bind to all interfaces
 CMD ["npm", "run", "preview", "--", "--port", "3000", "--host", "0.0.0.0"]
-
