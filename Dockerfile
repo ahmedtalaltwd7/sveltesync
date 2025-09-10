@@ -1,21 +1,18 @@
-# Use Node.js image
-FROM node:20
+FROM node:20-alpine
 
-# Create app directory
+RUN apk add --no-cache python3 make g++ 
+
 WORKDIR /app
 
-# Install dependencies
 COPY package*.json ./
-RUN npm install
+RUN npm install --production
 
-# Copy source code
 COPY . .
 
-# Build the SvelteKit app
 RUN npm run build
 
-# Expose port
 EXPOSE 3000
 
-# Run preview server
-CMD ["npm", "run", "preview"]
+# Force preview to use port 3000 and bind to all interfaces
+CMD ["npm", "run", "preview", "--", "--port", "3000", "--host", "0.0.0.0"]
+
