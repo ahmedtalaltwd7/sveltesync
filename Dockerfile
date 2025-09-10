@@ -1,0 +1,21 @@
+# Use Node.js image
+FROM node:20
+
+# Create app directory
+WORKDIR /app
+
+# Install dependencies
+COPY package*.json ./
+RUN npm install
+
+# Copy source code
+COPY . .
+
+# Build the SvelteKit app
+RUN npm run build
+
+# Expose port
+EXPOSE 3000
+
+# Run preview server
+CMD ["npm", "run", "preview"]
